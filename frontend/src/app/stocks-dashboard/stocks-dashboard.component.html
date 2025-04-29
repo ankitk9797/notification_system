@@ -1,0 +1,51 @@
+<div class="container">
+  <button (click)="openAddStockModal()">Add New Stock</button>
+
+  <div *ngIf="stocks.length > 0; else noStocks">
+    <table>
+      <thead>
+      <tr>
+        <th>Stock Name</th>
+        <th>Stock Price</th>
+        <th>Subscribe</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let stock of stocks">
+        <td>{{ stock.name }}</td>
+        <td>{{ stock.price }}</td>
+        <td>
+          <button *ngIf="!stock.subscribed" (click)="subscribe(stock)">Subscribe</button>
+          <button *ngIf="stock.subscribed" (click)="unsubscribe(stock)">Unsubscribed</button>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- MODAL -->
+  <div class="modal" *ngIf="showModal">
+    <div class="modal-content">
+      <h2>Add New Stock</h2>
+      <label>
+        Name:
+        <input [(ngModel)]="newStock.name" type="text" />
+      </label>
+      <label>
+        Price:
+        <input [(ngModel)]="newStock.price" type="number" />
+      </label>
+      <div class="actions">
+        <button (click)="submitStock()">Submit</button>
+        <button (click)="closeModal()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noStocks>
+    <p>No stocks available.</p>
+  </ng-template>
+</div>
+
+
+

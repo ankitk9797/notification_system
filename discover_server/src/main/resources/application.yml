@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: DISCOVERY_SERVER
+server:
+  port: 8761
+
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    register-with-eureka: false # not to register itself as client
+    fetch-registry: false # not to fetch the registry from another Eureka server.

@@ -1,0 +1,55 @@
+version: '3.8'
+
+services:
+#  postgres:
+#    image: docker.io/library/postgres:15
+#    container_name: postgres-db
+#    environment:
+#      POSTGRES_USER: postgres
+#      POSTGRES_PASSWORD: postgres
+#      POSTGRES_DB: stocks_management
+#    volumes:
+#      - pgdata:/var/lib/postgresql/data
+#    ports:
+#      - "5433:5432"
+#    healthcheck:
+#      test: [ "CMD", "pg_isready", "-U", "postgres" ]
+#      interval: 10s
+#      timeout: 5s
+#      retries: 5
+#volumes:
+#  pgdata:
+
+  discovery-server:
+    build:
+      context: ./discover_server
+    container_name: discovery-server
+    ports:
+      - "8761:8761"
+
+#  api-gateway:
+#    build:
+#      context: ./api_gateway
+#    container_name: api-gateway
+#    ports:
+#      - "9090:9090"
+#    depends_on:
+#      - discovery-server
+#
+#  user-management:
+#    build:
+#      context: ./user_management
+#    container_name: user-management
+#    ports:
+#      - "9091:9091"
+#    depends_on:
+#      - discovery-server
+
+  stocks-management:
+    build:
+      context: ./stocks_management
+    container_name: stocks-management
+    ports:
+      - "9092:9092"
+    depends_on:
+      - discovery-server

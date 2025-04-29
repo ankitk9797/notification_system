@@ -1,0 +1,16 @@
+-> podman-compose -f podman-compose.yml up -d
+
+-> podman exec -it postgres-db sh
+
+-> psql -U postgres -d stocks_management
+
+-> \dt : list tables
+
+-> exit
+
+-> \q : exit psql
+-> \l : list databases
+
+-> podman-compose down
+
+-> podman compose up --build

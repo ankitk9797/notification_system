@@ -1,0 +1,43 @@
+=> Keycloak with user login(done)
+   - register user
+     - 
+   - login with keycloak
+
+=> Stocks controller (done)
+   - col: name, price, list of subscribed users
+   - CRUD
+   - list all Stocks
+   - user can subscribe 
+=> api-gateway: done
+=> service-discovery: done
+=> remove hardcoded value
+=> while creating keycloak user, undo changes if saving user to db(stock db) failed
+=> create docker-compose for all services, FE, postgres, keycloak
+=> common config server
+=> how api-gateway handles load balancing
+
+
+
+-------------------------------keycloak client setup-------------------------------------
+=> clients -> notification_system_users -> service account roles
+   assign roles -> manage-real, manage-users, view-real, view users
+=> FE client -> create new client
+             -> client_id
+             -> Valid redirect URIs: http://localhost:4200/*
+             -> Web origins: http://localhost:4200
+             -> Authentication flow: standard flow
+             ## authentication should be off
+
+-----------------------Kafka installation--------------------------
+
+-> podman run -p 9094:9094 apache/kafka:4.0.0
+
+
+-----------------------------Kafka commands-----------------------------
+-> podman exec -it gracious_sinoussi /opt/kafka/bin/kafka-topics.sh --list --bootstrap-server localhost:9092
+
+-> podman exec -it gracious_sinoussi /opt/kafka/bin/kafka-topics.sh --create --bootstrap-server localhost:9092 --topic stock-price-updates
+
+-> podman exec -it gracious_sinoussi /opt/kafka/bin/kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic stock-price-updates --from-beginning
+
+

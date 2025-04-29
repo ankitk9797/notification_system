@@ -1,0 +1,44 @@
+spring:
+  application:
+    name: ALERT-SYSTEM
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: kankit5697@gmail.com
+    password: luvhybvpchezirba
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+  datasource:
+    username: postgres
+    password: postgres
+    url: "jdbc:postgresql://localhost:5432/stocks_management"
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: my-group
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring:
+          json:
+            trusted:
+              packages: "com.notification_system.alert_system.dto,com.notification_system.stocks_management.dto,java.util,java.lang"
+        value:
+          deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.value.default.type: com.notification_system.stocks_management.dto.StockPriceUpdate
+eureka:
+  instance:
+    hostname: localhost
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+server:
+  port: 9093

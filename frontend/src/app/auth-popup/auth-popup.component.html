@@ -1,0 +1,33 @@
+<div class="auth-buttons">
+  <button (click)="openModal('login')">Login</button>
+  <button (click)="openModal('register')">Register</button>
+</div>
+
+<!-- MODAL -->
+<div class="modal" *ngIf="showModal">
+  <div class="modal-content">
+    <h2>{{ mode === 'login' ? 'Login' : 'Register' }}</h2>
+
+    <form (ngSubmit)="submit()">
+      <label *ngIf="mode === 'register'">
+        Name:
+        <input type="text" [(ngModel)]="formData.name" name="name" />
+      </label>
+
+      <label>
+        Email:
+        <input type="email" [(ngModel)]="formData.email" name="email" />
+      </label>
+
+      <label>
+        Password:
+        <input type="password" [(ngModel)]="formData.password" name="password" />
+      </label>
+
+      <div class="actions">
+        <button type="submit">{{ mode === 'login' ? 'Login' : 'Register' }}</button>
+        <button type="button" (click)="closeModal()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>
